@@ -36,7 +36,7 @@ public class Client {
         encoder.put_int(hop_limit);
         encoder.put_double(threshold);
         encoder.put_int(limit);
-        encoder.put_byte((byte) 0);
+        encoder.put_byte((byte) 1);
 
         List<Long> result = null;
         try {
@@ -82,7 +82,7 @@ public class Client {
             encoder.put_long(company_id);
         }
         encoder.put_int(limit);
-        encoder.put_byte((byte) 1);
+        encoder.put_byte((byte) 2);
 
         List<List<Long>> result = null;
         try {

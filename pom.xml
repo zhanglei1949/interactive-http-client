@@ -11,9 +11,6 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <protobuf.version>3.22.2</protobuf.version>
-        <protoc.version>3.22.2</protoc.version>
-        <protobuf.maven.version>0.6.1</protobuf.maven.version>
         <grpc.version>1.51.1</grpc.version>
         <slf4j.version>1.7.30</slf4j.version>
         <log4j2.version>2.19.0</log4j2.version>

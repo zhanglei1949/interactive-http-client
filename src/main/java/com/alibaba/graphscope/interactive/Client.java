@@ -77,11 +77,11 @@ public class Client {
         byte[] bytesArray = new byte[4 + 4 + company_ids.size() * 8 + 4 + 1];
         Encoder encoder = new Encoder(bytesArray);
         encoder.put_int(hop_limit);
+        encoder.put_int(limit);
         encoder.put_int(company_ids.size());
         for (long company_id : company_ids) {
             encoder.put_long(company_id);
         }
-        encoder.put_int(limit);
         encoder.put_byte((byte) 2);
 
         List<List<Long>> result = null;

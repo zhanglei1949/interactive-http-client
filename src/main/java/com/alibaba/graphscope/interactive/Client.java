@@ -57,8 +57,8 @@ public class Client {
             System.out.println("Status code: " + statusCode);
             System.out.println("Response body: " + responseBody);
             Decoder decoder = new Decoder(responseBody.getBytes());
-            int size = decoder.get_int();
-            result = new ArrayList<>(size);
+            long size = decoder.get_long();
+            result = new ArrayList<>((int)size);
             for (int i = 0; i < size; i++) {
                 result.add(decoder.get_long());
             }

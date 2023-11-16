@@ -20,7 +20,7 @@ public class ClientTest {
     }
     @Test
     public void testQuery1() {
-        client.SubmitCtrlQuery(520201007000000255, 5, 0.5, 10);
+        client.SubmitCtrlQuery(520201007000000255L, 5, 0.5, 10);
     }
 
     @Test

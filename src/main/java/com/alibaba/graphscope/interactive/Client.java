@@ -11,8 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Send to interactive service via this client.
@@ -49,20 +47,23 @@ public class Client {
                                     (byte[]) bytesArray))
                     .build();
 
-            HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<byte[]> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofByteArray());
 
             int statusCode = response.statusCode();
-            String responseBody = response.body();
 
-            System.out.println("Status code: " + statusCode);
-            System.out.println("Response body: " + responseBody);
-            Decoder decoder = new Decoder(responseBody.getBytes());
-            long size = decoder.get_long();
-            result = new ArrayList<>((int)size);
-            for (int i = 0; i < size; i++) {
-                result.add(decoder.get_long());
+            byte[] responseBody = response.body();
+            if (statusCode != 200) {
+                LOG.error("Query failed {}", statusCode);
+                return null;
+            } else {
+                Decoder decoder = new Decoder(responseBody);
+                long size = decoder.get_long();
+                result = new ArrayList<>((int)size);
+                for (int i = 0; i < size; i++) {
+                    result.add(decoder.get_long());
+                }
+                LOG.info("Get {} results", size);
             }
-            LOG.info("Get {} results", size);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -98,23 +99,24 @@ public class Client {
 
             int statusCode = response.statusCode();
             byte[] responseBody = response.body();
-
-            Decoder decoder = new Decoder(responseBody);
-            int size = decoder.get_int();
-	    LOG.info("got result size: {}", size);
-	    System.out.println("result size" + size);
-            result = new ArrayList<>(size);
-            for (int i = 0; i < size; i++) {
-                int size2 = decoder.get_int();
-		LOG.info("path size: {}", size2); 
-		System.out.println("path size " + size2);
-                List<Long> result2 = new ArrayList<>(size2);
-                for (int j = 0; j < size2; j++) {
-                    result2.add(decoder.get_long());
+            if (statusCode != 200) {
+                LOG.error("Query failed {}", statusCode);
+                return null;
+            } else {
+                Decoder decoder = new Decoder(responseBody);
+                int size = decoder.get_int();
+                LOG.info("got result size: {}", size);
+                result = new ArrayList<>(size);
+                for (int i = 0; i < size; i++) {
+                    int size2 = decoder.get_int();
+                    List<Long> result2 = new ArrayList<>(size2);
+                    for (int j = 0; j < size2; j++) {
+                        result2.add(decoder.get_long());
+                    }
+                    result.add(result2);
                 }
-                result.add(result2);
+                LOG.info("Get {} results", size);
             }
-            LOG.info("Get {} results", size);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

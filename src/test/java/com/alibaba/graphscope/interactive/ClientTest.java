@@ -11,7 +11,12 @@ public class ClientTest {
 
     @BeforeClass
     public static void beforeClass() {
-        client = new Client("localhost:10000");
+        //get System property interactive.endpoint
+        String endpoint = System.getProperty("interactive.endpoint");
+        if (endpoint == null){
+            endpoint = "localhost:10000";
+        }
+        client = new Client(endpoint);
     }
 
     @Test

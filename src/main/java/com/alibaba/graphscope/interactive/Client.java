@@ -94,12 +94,12 @@ public class Client {
                             HttpRequest.BodyPublishers.ofByteArray(
                                     (byte[]) bytesArray))
                     .build();
-            HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<byte[]> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofByteArray());
 
             int statusCode = response.statusCode();
-            String responseBody = response.body();
+            byte[] responseBody = response.body();
 
-            Decoder decoder = new Decoder(responseBody.getBytes());
+            Decoder decoder = new Decoder(responseBody);
             int size = decoder.get_int();
 	    LOG.info("got result size: {}", size);
 	    System.out.println("result size" + size);

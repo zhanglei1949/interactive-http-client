@@ -99,13 +99,15 @@ public class Client {
             int statusCode = response.statusCode();
             String responseBody = response.body();
 
-            System.out.println("Status code: " + statusCode);
-            System.out.println("Response body: " + responseBody);
             Decoder decoder = new Decoder(responseBody.getBytes());
             int size = decoder.get_int();
+	    LOG.info("got result size: {}", size);
+	    System.out.println("result size" + size);
             result = new ArrayList<>(size);
             for (int i = 0; i < size; i++) {
                 int size2 = decoder.get_int();
+		LOG.info("path size: {}", size2); 
+		System.out.println("path size " + size2);
                 List<Long> result2 = new ArrayList<>(size2);
                 for (int j = 0; j < size2; j++) {
                     result2.add(decoder.get_long());

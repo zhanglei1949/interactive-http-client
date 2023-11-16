@@ -18,9 +18,13 @@ public class ClientTest {
     public void testQuery0() {
         client.SubmitCtrlQuery(520201007000000062L, 5, 0.5, 10);
     }
-
     @Test
     public void testQuery1() {
+        client.SubmitCtrlQuery(520201007000000255, 5, 0.5, 10);
+    }
+
+    @Test
+    public void testQuery2() {
         List<Long> ids = Arrays.asList(
                 1230118000014018178L, 1221117000016036801L, 1180731001224652820L, 1221117000017575180L, 1180716005004678513L,
                 1180716045428054751L, 1210329000214919854L, 1230106000007476317L, 1190824000001575203L, 1220810000014048518L,

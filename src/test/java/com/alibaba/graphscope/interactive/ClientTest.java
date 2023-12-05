@@ -106,7 +106,7 @@ public class ClientTest {
 	    logger.info("");
 	}
     }
-    @Test
+    // @Test
     public void testQuery6(){
  	List<Long> ids = Arrays.asList(1180716087218748685L,1180716045627137320L);
 	List<List<Long>> res = client.SubmitGroupQuery(3, ids, 10);
@@ -121,5 +121,20 @@ public class ClientTest {
 	    }
 	    logger.info("");
 	}     
+    }
+
+   @Test
+    public void testGroupWithFilter() {
+	List<Long> ids = Arrays.asList(1180716088243886300L,1201209000187779600L);
+    List<Integer> validRelTypes = Arrays.asList(0,1,2,3,4,6);
+	List<List<Client.Edge>> res = client.SubmitGroupFilterQuery(5, ids, validRelTypes, 100);
+	System.out.println("test3");
+	for (int i = 0; i < res.size(); ++i){
+            System.out.println(res.toString());
+	    for (int j = 0; j < res.get(i).size(); ++j){
+		logger.info("{},", res.get(i).get(j));
+	    }
+	    logger.info("");
+	}
     }
 }

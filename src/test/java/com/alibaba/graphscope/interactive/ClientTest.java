@@ -125,7 +125,7 @@ public class ClientTest {
 
    @Test
     public void testGroupWithFilter() {
-	List<Long> ids = Arrays.asList(1180716088243886300L,1201209000187779600L);
+	List<Long> ids = Arrays.asList(520201007186443096L, 1180716054222827521L);
     List<Integer> validRelTypes = Arrays.asList(0,1,2,3,4,6);
 	List<List<Client.Edge>> res = client.SubmitGroupFilterQuery(5, ids, validRelTypes, 100);
 	System.out.println("test3");

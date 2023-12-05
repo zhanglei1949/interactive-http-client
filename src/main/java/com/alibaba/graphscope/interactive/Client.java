@@ -149,7 +149,7 @@ public class Client {
 
     public List<List<Edge>> SubmitGroupFilterQuery(int hop_limit, List<Long> company_ids, 
         List<Integer> valid_rel_types,int limit) {
-        byte[] bytesArray = new byte[4 + 4 + company_ids.size() * 8 + valid_rel_types.size() * 4 + 4 + 1];
+        byte[] bytesArray = new byte[4 + 4 + company_ids.size() * 8 + 4 + valid_rel_types.size() * 4 + 4 + 1];
         Encoder encoder = new Encoder(bytesArray);
         encoder.put_int(hop_limit);
         encoder.put_int(limit);
@@ -161,7 +161,7 @@ public class Client {
         for (long company_id : company_ids) {
             encoder.put_long(company_id);
         }
-        encoder.put_byte((byte) 2);
+        encoder.put_byte((byte) 1);
 
         List<List<Edge>> result = null;
         try {

@@ -127,12 +127,12 @@ public class ClientTest {
         }
     }
 
-//    @Test
+    @Test
     public void testGroupWithFilter() {
-        List<Long> ids = Arrays.asList(520201007186443096L, 1180716054222827521L);
+        List<Long> ids = Arrays.asList(1180716054222827521L, 1180716054182460676L);
         List<Integer> validRelTypes = Arrays.asList(0, 1, 2, 3, 4, 6);
-        List<List<Client.Edge>> res = client.SubmitGroupFilterQuery(5, ids, validRelTypes, 100);
-        System.out.println("test3");
+        List<List<Client.Edge>> res = client.SubmitGroupFilterQuery(10, ids, validRelTypes, 100);
+        System.out.println("testGroupWithFilter");
         for (int i = 0; i < res.size(); ++i) {
             System.out.println(res.toString());
             for (int j = 0; j < res.get(i).size(); ++j) {

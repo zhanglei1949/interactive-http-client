@@ -130,6 +130,7 @@ public class ClientTest {
     @Test
     public void testGroupWithFilter() {
         List<Long> ids = Arrays.asList(1180716054222827521L, 1180716054182460676L);
+        //List<Long> ids = Arrays.asList(1L, 2L);
         List<Integer> validRelTypes = Arrays.asList(0, 1, 2, 3, 4, 6);
         List<List<Client.Edge>> res = client.SubmitGroupFilterQuery(10, ids, validRelTypes, 100);
         System.out.println("testGroupWithFilter");
@@ -144,9 +145,10 @@ public class ClientTest {
 
 	@Test
 	public void testOkHttpGroupWithFilter() {
-		List<Long> ids = Arrays.asList(1180716054222827521L, 1180716054182460676L);
-		List<Integer> validRelTypes = Arrays.asList(0, 1, 2, 3, 4, 6);
-		List<List<Client.Edge>> res = client.SubmitGroupQueryV2(10, ids, validRelTypes, 100);
+		List<Long> ids = Arrays.asList(1180716023069856263L, 1190120000016612960L, 1180716022615556113L);
+		//List<Long> ids = Arrays.asList(1L, 2L);
+		List<Integer> validRelTypes = Arrays.asList(10, 15, 18, 4, 13, 7, 8, 1, 9, 11, 12, 6, 17, 2, 5, 3, 16);
+		List<List<Client.Edge>> res = client.SubmitGroupQueryV2(10, ids, validRelTypes, 10);
 		System.out.println("testOkHttpGroupWithFilter");
 		for (int i = 0; i < res.size(); ++i) {
 			System.out.println(res.toString());
